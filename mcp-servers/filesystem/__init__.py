@@ -1,0 +1,2 @@
+"""Filesystem MCP server package."""
+
