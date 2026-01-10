@@ -1,0 +1,104 @@
+{
+  "name": "coding-agent",
+  "displayName": "Coding Agent",
+  "description": "AI-powered coding agent with Plan-Execute-Verify loop",
+  "version": "0.1.0",
+  "publisher": "coding-agent",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning"
+  ],
+  "activationEvents": [
+    "onCommand:codingAgent.start",
+    "onCommand:codingAgent.showChat"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codingAgent.start",
+        "title": "Coding Agent: Start Task"
+      },
+      {
+        "command": "codingAgent.stop",
+        "title": "Coding Agent: Stop Current Task"
+      },
+      {
+        "command": "codingAgent.showChat",
+        "title": "Coding Agent: Show Chat"
+      },
+      {
+        "command": "codingAgent.indexWorkspace",
+        "title": "Coding Agent: Index Workspace"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "coding-agent",
+          "title": "Coding Agent",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "coding-agent": [
+        {
+          "id": "codingAgentChat",
+          "name": "Chat",
+          "type": "webview"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Coding Agent",
+      "properties": {
+        "codingAgent.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python executable"
+        },
+        "codingAgent.llmProvider": {
+          "type": "string",
+          "enum": ["openai", "ollama"],
+          "default": "openai",
+          "description": "LLM provider to use"
+        },
+        "codingAgent.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key"
+        },
+        "codingAgent.model": {
+          "type": "string",
+          "default": "gpt-4",
+          "description": "Model name"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.55.0",
+    "typescript": "^5.3.3",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.5"
+  }
+}
+
